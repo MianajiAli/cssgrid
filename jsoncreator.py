@@ -22,7 +22,7 @@ def generate_blocks(n, m, space, max_blocks):
                         "width": m,
                         "height": m,
                         "imageUrl": img_path,
-                        "linkUrl": f"{img_index}",
+                        "linkUrl": f"/images/{img_filename}",
                         "title": ""
                     }
                     blocks.append(block)
