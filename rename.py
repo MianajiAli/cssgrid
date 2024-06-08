@@ -2,6 +2,10 @@ import os
 
 # Define the path to the folder containing the images
 folder_path = "./images/"
+# Define valid extensions
+valid_extensions = ['.jpg', '.jpeg', '.png', '.webp', '.svg']
+# List to keep track of deleted files
+deleted_files = []
 
 try:
     # Get a list of all files in the folder
@@ -20,20 +24,26 @@ try:
 
         # Check if it's a file (and not a directory)
         if os.path.isfile(os.path.join(folder_path, filename)):
-            # Temporary new name for the file
-            temp_name = f"temp_{counter}{ext}"
+            if ext.lower() in valid_extensions:
+                # Temporary new name for the file
+                temp_name = f"temp_{counter}{ext}"
 
-            # Construct the full path for both old and temporary names
-            old_path = os.path.join(folder_path, filename)
-            temp_path = os.path.join(folder_path, temp_name)
+                # Construct the full path for both old and temporary names
+                old_path = os.path.join(folder_path, filename)
+                temp_path = os.path.join(folder_path, temp_name)
 
-            # Rename the file to the temporary name
-            os.rename(old_path, temp_path)
+                # Rename the file to the temporary name
+                os.rename(old_path, temp_path)
 
-            print(f"Temporarily renamed '{filename}' to '{temp_name}'")
+                print(f"Temporarily renamed '{filename}' to '{temp_name}'")
 
-            # Increment counter for the next file
-            counter += 1
+                # Increment counter for the next file
+                counter += 1
+            else:
+                # Delete the file with invalid extension
+                os.remove(os.path.join(folder_path, filename))
+                deleted_files.append(filename)
+                print(f"Deleted file with invalid extension: '{filename}'")
 
     # Reset counter for the second pass
     counter = 1
@@ -61,6 +71,14 @@ try:
             counter += 1
 
     print("All files renamed successfully.")
+
+    # Log the deleted files
+    if deleted_files:
+        print("\nDeleted files:")
+        for file in deleted_files:
+            print(file)
+    else:
+        print("\nNo files were deleted.")
 
 except FileNotFoundError:
     print("The specified folder does not exist.")
