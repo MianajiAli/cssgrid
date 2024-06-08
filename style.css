@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Million Dollar Homepage</title>
-    <style>
+
         body {
             display: flex;
             justify-content: center;
@@ -27,47 +21,6 @@
             width: 100%;
             height: 100%;
         }
-    </style>
-</head>
-<body>
-    <div id="grid">
-        <!-- Pixels will be appended here by JavaScript -->
-    </div>
 
-    <script>
-        const grid = document.getElementById('grid');
-
-        // Create 10000 pixels (100x100 grid)
-        for (let i = 0; i < 10000; i++) {
-            const pixel = document.createElement('div');
-            pixel.className = 'pixel';
-            grid.appendChild(pixel);
-        }
-
-        // Function to place an image on the grid
-        function placeImage(x, y, width, height, imageUrl, linkUrl) {
-            const index = (y * 100) + x;
-            const pixel = grid.children[index];
-
-            const link = document.createElement('a');
-            link.href = linkUrl;
-            link.target = '_blank';
-
-            const img = document.createElement('img');
-            img.src = imageUrl;
-            img.style.width = `${width * 10}px`;
-            img.style.height = `${height * 10}px`;
-
-            link.appendChild(img);
-            pixel.appendChild(link);
-
-            pixel.style.gridRow = `${y + 1} / span ${height}`;
-            pixel.style.gridColumn = `${x + 1} / span ${width}`;
-        }
-
-        // Example usage
-        placeImage(0, 0, 10, 10, 'https://via.placeholder.com/100', 'https://example.com');
-        placeImage(10, 10, 20, 20, 'https://via.placeholder.com/200', 'https://example.com');
-    </script>
 </body>
 </html>
