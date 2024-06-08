@@ -35,9 +35,9 @@ def save_blocks_to_json(blocks, filename):
 
 # Example usage
 n = 100    # Size of the board
-m = 5      # Size of each block
+m = 5# Size of each block
 space = 0  # Space between blocks
-max_blocks = 68  # Maximum number of blocks to generate
+max_blocks = 1000  # Maximum number of blocks to generate
 blocks = generate_blocks(n, m, space, max_blocks)
 total_blocks = len(blocks)  # Calculate total number of blocks
 print(f"Total number of blocks generated: {total_blocks}")
