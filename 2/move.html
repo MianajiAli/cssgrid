@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1 Million Pixel</title>
+    <link rel="stylesheet" href="./move.css"> <!-- Link to external CSS file -->
+</head>
+<body>
+    <div id="container"></div>
+    <div class="menus">
+        <button id="download-btn" style="margin-bottom: 50px;">Download Updated JSON</button>
+
+        <input type="text" id="upload-url" placeholder="Enter image URL">
+        <button id="upload-btn">Upload Image</button>
+        <div id="edit-form" style="display: none;"> <!-- Initially hidden -->
+            <h3>Edit Pixel Properties</h3>
+            <label>Width: <input type="number" id="pixel-width"></label>
+            <label>Height: <input type="number" id="pixel-height"></label>
+            <label>Image URL: <input type="text" id="pixel-imageUrl"></label>
+            <label>Link URL: <input type="text" id="pixel-linkUrl"></label>
+            <label>Title: <input type="text" id="pixel-title"></label>
+            <div>
+                
+                <button id="save-btn" >Save</button>
+            <button id="delete-btn">Delete</button>
+            </div>
+        </div>
+        <div id="reorder-menu" style="display: none;">
+            <!-- Reorder menu will be dynamically generated -->
+            <h3>Reorder Pixels</h3>
+            <ul id="pixel-list"></ul>
+        </div>
+    </div>
+
+    <script src="./index.js"></script> <!-- Combined JavaScript file -->
+</body>
+</html>
