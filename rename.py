@@ -3,33 +3,27 @@ import os
 # Define the path to the folder containing the images
 folder_path = "./images/"
 
-# Get a list of all JPG files in the folder
-jpg_files = [f for f in os.listdir(folder_path) if f.lower().endswith('.jpg')]
+# Get a list of all files in the folder
+files = os.listdir(folder_path)
 
-# Ensure there are at most 10000 JPG files
-if len(jpg_files) > 10000:
-    raise ValueError("The folder contains more than 10000 JPG files. Please reduce the number of files.")
+# Sort the files to ensure they're in the correct order
+files.sort()
 
-# Sort the files to maintain a consistent order
-jpg_files.sort()
+# Counter for renaming
+counter = 1
 
-# Rename each file
-i, j = 1, 1
-for index, filename in enumerate(jpg_files):
-    # Create the new file name
-    new_filename = f"{i}-{j}.jpg"
-    # Define the full old and new file paths
-    old_file_path = os.path.join(folder_path, filename)
-    new_file_path = os.path.join(folder_path, new_filename)
+# Iterate over each file and rename
+for filename in files:
+    # Split the file name and its extension
+    name, ext = os.path.splitext(filename)
+    # New name for the file
+    new_name = str(counter) + ext
+    # Construct the full path for both old and new names
+    old_path = os.path.join(folder_path, filename)
+    new_path = os.path.join(folder_path, new_name)
     # Rename the file
-    os.rename(old_file_path, new_file_path)
-    
-    # Update i and j
-    j += 1
-    if j > 100:
-        j = 1
-        i += 1
+    os.rename(old_path, new_path)
+    # Increment counter for the next file
+    counter += 1
 
-# Ensure no more than 100 * 100 files are present
-if i > 100:
-    raise ValueError("The folder contains more than 10000 JPG files. Please reduce the number of files.")
+print("All files renamed successfully.")
