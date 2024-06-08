@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Image - The Million Dollar Homepage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            margin: auto;
+        }
+        input, button {
+            margin-bottom: 10px;
+        }
+        #message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload Image</h1>
+    <form id="uploadForm">
+        <label for="x">X Coordinate:</label>
+        <input type="number" id="x" name="x" required>
+        
+        <label for="y">Y Coordinate:</label>
+        <input type="number" id="y" name="y" required>
+        
+        <label for="width">Width (in pixels):</label>
+        <input type="number" id="width" name="width" required>
+        
+        <label for="height">Height (in pixels):</label>
+        <input type="number" id="height" name="height" required>
+        
+        <label for="imageUrl">Image URL:</label>
+        <input type="url" id="imageUrl" name="imageUrl" required>
+        
+        <label for="linkUrl">Link URL:</label>
+        <input type="url" id="linkUrl" name="linkUrl" required>
+        
+        <label for="tooltip">Tooltip:</label>
+        <input type="text" id="tooltip" name="tooltip" required>
+        
+        <button type="submit">Upload</button>
+        <p id="message"></p>
+    </form>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const x = parseInt(document.getElementById('x').value);
+            const y = parseInt(document.getElementById('y').value);
+            const width = parseInt(document.getElementById('width').value);
+            const height = parseInt(document.getElementById('height').value);
+            const imageUrl = document.getElementById('imageUrl').value;
+            const linkUrl = document.getElementById('linkUrl').value;
+            const tooltip = document.getElementById('tooltip').value;
+            const message = document.getElementById('message');
+
+            // Fetch current image data to check for conflicts
+            fetch('images.json')
+                .then(response => response.json())
+                .then(data => {
+                    let conflict = false;
+
+                    // Check for overlapping images
+                    data.forEach(imageData => {
+                        const x1 = imageData.x;
+                        const y1 = imageData.y;
+                        const w1 = imageData.width;
+                        const h1 = imageData.height;
+
+                        if (x < x1 + w1 && x + width > x1 && y < y1 + h1 && y + height > y1) {
+                            conflict = true;
+                        }
+                    });
+
+                    if (conflict) {
+                        message.textContent = 'The specified location overlaps with an existing image.';
+                    } else {
+                        // Add new image data to the JSON
+                        const newImage = {
+                            x,
+                            y,
+                            width,
+                            height,
+                            imageUrl,
+                            linkUrl,
+                            tooltip
+                        };
+
+                        data.push(newImage);
+
+                        // Save updated data back to JSON file (simulate here, won't work in real application)
+                        saveJSONToFile('images.json', data)
+                            .then(() => {
+                                message.textContent = 'Image uploaded successfully!';
+                                message.style.color = 'green';
+                            })
+                            .catch(error => {
+                                console.error('Error saving JSON data:', error);
+                                message.textContent = 'An error occurred while uploading the image.';
+                            });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching JSON data:', error);
+                    message.textContent = 'An error occurred while uploading the image.';
+                });
+        });
+
+        // Function to save JSON data to a file (simulated here)
+        async function saveJSONToFile(filename, json) {
+            const blob = new Blob([JSON.stringify(json)], { type: 'application/json' });
+            const url = window.URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+
+            setTimeout(() => {
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+            }, 0);
+        }
+    </script>
+</body>
+</html>
