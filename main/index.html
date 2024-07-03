@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1 Million Pixel</title>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <style>
+        input{
+            width: 100px;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #111111;
+        }
+
+        #container {
+            position: relative;
+            background: #202020;
+            width: 1000px;
+            height: 1000px;
+            background-image: linear-gradient(#444 1px, transparent 1px), linear-gradient(90deg, #444 1px, transparent 1px);
+            /* Grid lines */
+            background-size: 10px 10px;
+        }
+
+        .pixel {
+            position: absolute;
+            border: 1px solid #444;
+        }
+
+        .pixel img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        header {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #edit-form {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+
+        <header>
+            <div>
+
+                <input type="text" id="upload-url" placeholder="Enter image URL">
+                <button id="upload-btn">Add Pixel</button>
+                <button id="download-btn">Download JSON</button>
+                
+            </div>
+            <div id="edit-form">
+                <label for="pixel-x">X:</label>
+                <input type="number" id="pixel-x" name="pixel-x" min="1" max="100" required><br>
+            
+                <label for="pixel-y">Y:</label>
+                <input type="number" id="pixel-y" name="pixel-y" min="1" max="100" required><br>
+            
+                <label for="pixel-width">Width:</label>
+                <input type="number" id="pixel-width" name="pixel-width"><br>
+                <label for="pixel-height">Height:</label>
+                <input type="number" id="pixel-height" name="pixel-height"><br>
+                <label for="pixel-imageUrl">Image URL:</label>
+                <input type="text" id="pixel-imageUrl" name="pixel-imageUrl"><br>
+                <label for="pixel-linkUrl">Link URL:</label>
+                <input type="text" id="pixel-linkUrl" name="pixel-linkUrl"><br>
+                <label for="pixel-title">Title:</label>
+                <input type="text" id="pixel-title" name="pixel-title"><br>
+                <button id="save-btn">Save</button>
+                <button id="cancel-btn">Cancel</button>
+                <button id="delete-btn">Delete</button>
+            </div>
+        </header>
+        <main>
+            <div id="container"></div>
+        </main>
+
+    </div>
+
+    <script src="./index.js">
+    </script>
+</body>
+
+</html>

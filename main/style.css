@@ -1,0 +1,77 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    background-color: #111111;
+}
+
+#left-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #333333;
+    color: white;
+    padding: 20px;
+    overflow-y: auto; /* Add scrollbar if needed */
+}
+
+#edit-form {
+    display: none;
+    background: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin-top: 20px;
+}
+
+#container {
+    position: relative;
+    margin: 100px 0;
+    background: #202020;
+    width: 1000px;
+    height: 1000px;
+}
+
+.pixel {
+    position: absolute;
+    border: 1px solid #444;
+}
+
+.pixel img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#upload-btn, #download-btn {
+    margin-top: 10px;
+}
+
+input[type="number"], input[type="text"] {
+    margin-bottom: 5px;
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+button {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    color: #666666;
+}

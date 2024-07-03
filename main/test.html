@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse Movement Calculation</title>
+</head>
+<body>
+    <script>
+        let startX = 0;
+        let startY = 0;
+        let endX = 0;
+        let endY = 0;
+
+        // Function to handle mousedown event
+        function handleMouseDown(event) {
+            startX = event.clientX;
+            startY = event.clientY;
+            console.log(`Mouse Down at: (${startX}, ${startY})`);
+        }
+
+        // Function to handle mouseup event
+        function handleMouseUp(event) {
+            endX = event.clientX;
+            endY = event.clientY;
+            console.log(`Mouse Up at: (${endX}, ${endY})`);
+            calculateMovement();
+        }
+
+        // Function to calculate the movement
+        function calculateMovement() {
+            const deltaX = endX - startX;
+            const deltaY = endY - startY;
+            console.log(`Mouse moved: X: ${deltaX}, Y: ${deltaY}`);
+        }
+
+        // Add event listeners for mousedown and mouseup
+        document.addEventListener('mousedown', handleMouseDown);
+        document.addEventListener('mouseup', handleMouseUp);
+    </script>
+</body>
+</html>
