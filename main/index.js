@@ -16,7 +16,7 @@ fetch('blocks.json')
     })
     .catch(error => console.error('Error fetching blocks.json:', error));
 
-// Render pixels on the page
+// Render pixels on the page// Render pixels on the page
 function renderPixels() {
     const container = document.getElementById('container');
     container.innerHTML = ''; // Clear previous pixels
@@ -28,6 +28,15 @@ function renderPixels() {
             showEditForm();
         });
         container.appendChild(pixelElement);
+    });
+
+    // Handle click on empty area to cancel edit
+    container.addEventListener('click', (event) => {
+        if (!event.target.closest('.pixel')) {
+            selectedPixel = null;
+            selectedData = null;
+            hideEditForm();
+        }
     });
 }
 
@@ -102,18 +111,22 @@ document.addEventListener('keydown', (event) => {
             selectedPixel.style.left = `${(selectedData.x - 1) * 10}px`;
         }
     }
-});
-function showEditForm() {
+});function showEditForm() {
     const editForm = document.getElementById('edit-form');
-    editForm.style.display = 'flex';
-    document.getElementById('pixel-x').value = selectedData.x;
-    document.getElementById('pixel-y').value = selectedData.y;
-    document.getElementById('pixel-width').value = selectedData.width;
-    document.getElementById('pixel-height').value = selectedData.height;
-    document.getElementById('pixel-imageUrl').value = selectedData.imageUrl;
-    document.getElementById('pixel-linkUrl').value = selectedData.linkUrl;
-    document.getElementById('pixel-title').value = selectedData.title;
+    if (selectedData) {
+        editForm.style.display = 'flex';
+        document.getElementById('pixel-x').value = selectedData.x;
+        document.getElementById('pixel-y').value = selectedData.y;
+        document.getElementById('pixel-width').value = selectedData.width;
+        document.getElementById('pixel-height').value = selectedData.height;
+        document.getElementById('pixel-imageUrl').value = selectedData.imageUrl;
+        document.getElementById('pixel-linkUrl').value = selectedData.linkUrl;
+        document.getElementById('pixel-title').value = selectedData.title;
+    } else {
+        hideEditForm();
+    }
 }
+
 
 document.getElementById('save-btn').addEventListener('click', () => {
     selectedData.x = parseInt(document.getElementById('pixel-x').value);

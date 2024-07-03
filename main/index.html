@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>1 Million Pixel</title>
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <!-- <link rel="stylesheet" href="css/pico.min.css" /> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
     <style>
-        input{
+        input {
             width: 100px;
         }
+
         body {
             margin: 0;
             padding: 0;
@@ -40,25 +42,28 @@
 
         main {
             display: flex;
-            justify-content: center;
-            align-items: center;
+            padding: 10px 50px;
+            justify-content: space-between;
+            align-items: start;
         }
 
         header {
             width: 100%;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        #edit-form {
-            width: 100%;
-            display: flex;
             flex-direction: row;
             justify-content: center;
             align-items: center;
+            padding: 50px;
+        }
+
+        #edit-form {
+            width: 20%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             color: white;
+            display: none;
         }
     </style>
 </head>
@@ -67,20 +72,30 @@
     <div>
 
         <header>
-            <div>
-
+            <div role="group">
                 <input type="text" id="upload-url" placeholder="Enter image URL">
-                <button id="upload-btn">Add Pixel</button>
-                <button id="download-btn">Download JSON</button>
-                
+                <button id="upload-btn">Add</button>
+                <button id="download-btn">Download</button>
             </div>
+        </header>
+        <main>
+            <div id="container"></div>
             <div id="edit-form">
+                <div  style="display: flex;gap: 3px;">
+                    <button id="save-btn">Save</button>
+                    <!-- <button id="reset-btn">reset</button> -->
+                    <button id="delete-btn">Delete</button>
+                </div>
                 <label for="pixel-x">X:</label>
+                <input type="text" id="pixel-linkUrl" name="pixel-linkUrl"><br>
+                <label for="pixel-title">Title:</label>
+                <input type="text" id="pixel-title" name="pixel-title"><br>
+                <label for="pixel-y">x:</label>
                 <input type="number" id="pixel-x" name="pixel-x" min="1" max="100" required><br>
-            
+                
                 <label for="pixel-y">Y:</label>
                 <input type="number" id="pixel-y" name="pixel-y" min="1" max="100" required><br>
-            
+
                 <label for="pixel-width">Width:</label>
                 <input type="number" id="pixel-width" name="pixel-width"><br>
                 <label for="pixel-height">Height:</label>
@@ -88,16 +103,9 @@
                 <label for="pixel-imageUrl">Image URL:</label>
                 <input type="text" id="pixel-imageUrl" name="pixel-imageUrl"><br>
                 <label for="pixel-linkUrl">Link URL:</label>
-                <input type="text" id="pixel-linkUrl" name="pixel-linkUrl"><br>
-                <label for="pixel-title">Title:</label>
-                <input type="text" id="pixel-title" name="pixel-title"><br>
-                <button id="save-btn">Save</button>
-                <button id="cancel-btn">Cancel</button>
-                <button id="delete-btn">Delete</button>
+                <input type="text" id="pixel-linkUrl" name="pixel-imageUrl"><br>
+
             </div>
-        </header>
-        <main>
-            <div id="container"></div>
         </main>
 
     </div>
